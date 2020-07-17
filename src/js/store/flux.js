@@ -1,3 +1,5 @@
+import { object } from "prop-types";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -17,6 +19,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
+			showStore: () => {
+				const store = getStore();
+				console.dir(store);
+			},
+			toggleFavorite: name => {
+				const store = getStore();
+				const tmpToggle = (name.favorite = !name.favorite);
+				//const tmpResult = store.people.filter(item => item !== name.name);
+				//alert(tmpToggle);
+				//console.dir(store);
+				setStore(store);
+			},
 			getPlanets: async () => {
 				const response = await fetch("https://swapi.dev/api/planets/");
 
@@ -37,6 +51,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					//console.log("we are printing body", body);
 					setStore({
 						people: body.results
+					});
+					const store = getStore();
+					let tmpStore = store.people.map((item, key) => {
+						let tmpItem = item;
+						tmpItem.favorite = false;
+						return tmpItem;
+					});
+					setStore({
+						people: tmpStore
 					});
 				}
 			},

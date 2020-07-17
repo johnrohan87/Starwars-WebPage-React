@@ -4,13 +4,16 @@ import "../../styles/home.scss";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import { Favorite } from "../component/favorite";
 
 export const Home = () => {
 	const { actions, store } = useContext(Context);
+	//const [favStatus, setFavStatus] = useState(false);
 	useEffect(() => {
 		//store.planets == [] ? (actions.getPlanets(), actions.getPeople()) : "";
 		actions.getPlanets();
 		actions.getPeople();
+		//actions.addFavPleople();
 	}, []);
 	return (
 		<div className="text-center mt-5">
@@ -40,15 +43,7 @@ export const Home = () => {
 												More about {event.name}
 											</div>
 										</Link>
-										<div
-											key={index}
-											className="btn btn-primary bg-primary d-flex justify-content-between"
-											type="button"
-											onClick={e => {
-												alert("setFavorite " + event.name);
-											}}>
-											☆
-										</div>
+										<Favorite eventData={event} />
 									</div>
 								</div>
 							</div>
