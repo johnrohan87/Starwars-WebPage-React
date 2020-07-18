@@ -11,7 +11,9 @@ export const Favorite = ({ eventData }) => {
 			<div
 				key={eventData}
 				className={
-					"btn btn-primary " + (favStatus ? "bg-success" : "bg-primary") + " d-flex justify-content-between"
+					"btn btn-primary " +
+					(eventData.favorite ? "bg-success" : "bg-primary") +
+					" d-flex justify-content-between"
 				}
 				type="button"
 				onClick={e => {

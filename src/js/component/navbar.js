@@ -13,7 +13,17 @@ export const Navbar = () => {
 				<button className="btn btn-primary">Favorites</button>
 				{store.people.map((item, key) => {
 					if (item.favorite == true) {
-						return <div onClick={() => (item.favorite = !item.favorite)}>{item.name}</div>;
+						return (
+							<div
+								className="navToggle"
+								onClick={() =>
+									(store.people.favorite = item.favorite
+										? actions.toggleFavorite(item)
+										: alert("false"))
+								}>
+								{item.name}
+							</div>
+						);
 					} else {
 						return "";
 					}
